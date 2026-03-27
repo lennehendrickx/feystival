@@ -158,9 +158,10 @@
     buildHeroDancefloors();
     window.addEventListener("resize", schedule);
     if (typeof ResizeObserver !== "undefined") {
+      var ro = new ResizeObserver(schedule);
       for (var i = 0; i < HERO_FLOOR_PAIRS.length; i++) {
         var heroEl = document.querySelector(HERO_FLOOR_PAIRS[i].hero);
-        if (heroEl) new ResizeObserver(schedule).observe(heroEl);
+        if (heroEl) ro.observe(heroEl);
       }
     }
   }

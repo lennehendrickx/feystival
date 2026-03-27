@@ -8,17 +8,24 @@
       name="description"
       content="Feystival — DJ uit Wilsele. Formules van klassieke fuif tot vinyl, maatwerk en offerte op aanvraag."
     />
+    <meta name="theme-color" content="#07060c" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Feystival — DJ" />
+    <meta
+      property="og:description"
+      content="Feystival — DJ uit Wilsele. Formules van klassieke fuif tot vinyl, maatwerk en offerte op aanvraag."
+    />
+    <meta property="og:locale" content="nl_BE" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="assets/god-is-a-dj.jpeg" as="image" type="image/jpeg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Syne:wght@600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
-    <!--
-      Contact: vervang YOUR_EMAIL door je adres voor FormSubmit, of gebruik je eigen form endpoint.
-      Custom domain (GitHub Pages): voeg een bestand `CNAME` toe in de repo-root met alleen je domein (één regel).
-    -->
+    <script src="script.js" defer></script>
   </head>
   <body>
     <nav class="site-nav" aria-label="Hoofdnavigatie">
@@ -65,6 +72,7 @@
               alt="Feystival achter de draaitafel, armen omhoog, feestende gasten onder kleurrijke lichten in een tent."
               loading="eager"
               decoding="async"
+              fetchpriority="high"
               class="about-hero-img"
             />
             <figcaption class="visually-hidden">
@@ -177,6 +185,7 @@
         >
           <input type="hidden" name="_subject" value="Feystival — nieuwe aanvraag" />
           <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
           <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" />
 
           <label class="field">
@@ -202,7 +211,5 @@
     <footer class="foot">
       <p>© <span id="y"></span> Feystival</p>
     </footer>
-
-    <script src="script.js"></script>
   </body>
 </html>
