@@ -1023,6 +1023,11 @@ body {
   box-shadow: 0 0 0 3px rgba(0, 240, 255, 0.15);
 }
 
+.field input[type="date"] {
+  color-scheme: dark;
+  min-height: 2.75rem;
+}
+
 .field textarea {
   resize: vertical;
   min-height: 120px;
