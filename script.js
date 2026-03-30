@@ -4,6 +4,125 @@
     y.textContent = String(new Date().getFullYear());
   }
 
+  function initContactFormAjax() {
+    var form = document.getElementById("contact-form");
+    var panelForm = document.getElementById("contact-panel-form");
+    var panelSuccess = document.getElementById("contact-panel-success");
+    var panelError = document.getElementById("contact-panel-error");
+    var submitBtn = document.getElementById("contact-submit");
+    var sendAnother = document.getElementById("contact-send-another");
+    var successHeading = document.getElementById("contact-success-heading");
+    if (
+      !form ||
+      !panelForm ||
+      !panelSuccess ||
+      !panelError ||
+      !submitBtn ||
+      !sendAnother
+    ) {
+      return;
+    }
+
+    function formsubmitAjaxUrl(actionAttr) {
+      try {
+        var u = new URL(actionAttr, window.location.href);
+        if (u.hostname !== "formsubmit.co") return null;
+        return u.origin + "/ajax" + u.pathname;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function showError(msg) {
+      panelError.textContent = msg;
+      panelError.hidden = false;
+    }
+
+    function hideError() {
+      panelError.textContent = "";
+      panelError.hidden = true;
+    }
+
+    function showSuccess() {
+      hideError();
+      panelForm.hidden = true;
+      panelSuccess.hidden = false;
+      if (successHeading) {
+        successHeading.focus({ preventScroll: false });
+      }
+    }
+
+    function showFormAgain() {
+      panelSuccess.hidden = true;
+      panelForm.hidden = false;
+      form.reset();
+      hideError();
+      submitBtn.disabled = false;
+      submitBtn.removeAttribute("aria-busy");
+      var nameField = form.querySelector('input[name="name"]');
+      if (nameField) nameField.focus();
+    }
+
+    form.addEventListener("submit", function (ev) {
+      var ajaxUrl = formsubmitAjaxUrl(form.getAttribute("action"));
+      if (!ajaxUrl || typeof fetch !== "function") {
+        return;
+      }
+      ev.preventDefault();
+      if (!form.reportValidity()) return;
+
+      hideError();
+      submitBtn.disabled = true;
+      submitBtn.setAttribute("aria-busy", "true");
+
+      var payload = {};
+      var fd = new FormData(form);
+      fd.forEach(function (value, key) {
+        payload[key] = value;
+      });
+
+      fetch(ajaxUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      })
+        .then(function (res) {
+          if (res.ok) {
+            showSuccess();
+            return;
+          }
+          return res.text().then(function (t) {
+            throw new Error(t || res.statusText);
+          });
+        })
+        .catch(function () {
+          var em = "";
+          try {
+            em = new URL(form.getAttribute("action"), window.location.href)
+              .pathname.replace(/^\//, "");
+          } catch (e2) {
+            em = "";
+          }
+          showError(
+            em
+              ? "Versturen lukte niet. Probeer opnieuw of mail rechtstreeks naar " +
+                  em +
+                  "."
+              : "Versturen lukte niet. Probeer het later opnieuw."
+          );
+          submitBtn.disabled = false;
+          submitBtn.removeAttribute("aria-busy");
+        });
+    });
+
+    sendAnother.addEventListener("click", showFormAgain);
+  }
+
+  initContactFormAjax();
+
   function debounce(fn, ms) {
     var t;
     return function () {

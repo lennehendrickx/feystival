@@ -174,49 +174,88 @@
 
       <section class="region region--contact contact-wrap" id="contact" aria-labelledby="contact-title">
         <h2 id="contact-title" class="section-title">Contact</h2>
-        <p class="contact-hint">
-          Zoek je een DJ voor uw feest of event?<br> 
-          Aarzel niet om contact op te nemen voor een offerte of verdere vragen.<br>
+        <p class="contact-hint" id="contact-intro">
+          Zoek je een DJ voor uw feest of event?<br />
+          Aarzel niet om contact op te nemen voor een offerte of verdere vragen.<br />
           Vermeld zeker de datum en de locatie. Wij contacteren je zo snel mogelijk.
         </p>
 
-        <form
-          class="form"
-          action="https://formsubmit.co/thomasfeys@gmail.com"
-          method="POST"
+        <div
+          id="contact-panel-form"
+          class="contact-panel contact-panel--form"
         >
-          <input type="hidden" name="_subject" value="Feystival — nieuwe aanvraag" />
-          <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="false" />
-          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" />
+          <form
+            id="contact-form"
+            class="form"
+            action="https://formsubmit.co/thomasfeys@gmail.com"
+            method="post"
+          >
+            <input type="hidden" name="_subject" value="Feystival — nieuwe aanvraag" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" />
 
-          <label class="field">
-            <span class="label">Naam</span>
-            <input type="text" name="name" required autocomplete="name" />
-          </label>
+            <label class="field">
+              <span class="label">Naam</span>
+              <input type="text" name="name" required autocomplete="name" />
+            </label>
 
-          <label class="field">
-            <span class="label">E-mail</span>
-            <input type="email" name="email" required autocomplete="email" />
-          </label>
+            <label class="field">
+              <span class="label">E-mail</span>
+              <input type="email" name="email" required autocomplete="email" />
+            </label>
 
-          <label class="field">
-            <span class="label">Telefoon (optioneel)</span>
-            <input type="tel" name="phone" autocomplete="tel" inputmode="tel" />
-          </label>
+            <label class="field">
+              <span class="label">Telefoon (optioneel)</span>
+              <input type="tel" name="phone" autocomplete="tel" inputmode="tel" />
+            </label>
 
-          <label class="field">
-            <span class="label">Datum van het event (optioneel)</span>
-            <input type="date" name="event_date" autocomplete="off" />
-          </label>
+            <label class="field">
+              <span class="label">Datum van het event (optioneel)</span>
+              <input type="date" name="event_date" autocomplete="off" />
+            </label>
 
-          <label class="field">
-            <span class="label">Bericht</span>
-            <textarea name="message" rows="5" required></textarea>
-          </label>
+            <label class="field">
+              <span class="label">Bericht</span>
+              <textarea name="message" rows="5" required></textarea>
+            </label>
 
-          <button type="submit" class="submit">Verstuur</button>
-        </form>
+            <button type="submit" class="submit" id="contact-submit">
+              Verstuur
+            </button>
+          </form>
+        </div>
+
+        <div
+          id="contact-panel-success"
+          class="contact-panel contact-success"
+          hidden
+          aria-live="polite"
+        >
+          <h3
+            id="contact-success-heading"
+            class="section-title contact-success__title"
+            tabindex="-1"
+          >
+            Bedankt!
+          </h3>
+          <p class="contact-hint contact-success__lead">
+            Je bericht is goed verstuurd. We bekijken je aanvraag en nemen zo
+            snel mogelijk contact met je op.
+          </p>
+          <p class="contact-success__actions">
+            <button type="button" class="cta-button" id="contact-send-another">
+              Nog een bericht sturen
+            </button>
+          </p>
+        </div>
+
+        <p
+          id="contact-panel-error"
+          class="contact-form-error"
+          hidden
+          role="alert"
+        ></p>
       </section>
     </main>
 

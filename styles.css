@@ -867,7 +867,9 @@ body {
   align-items: center;
   justify-content: center;
   padding: 0.85rem 1.35rem;
+  border: none;
   border-radius: 12px;
+  cursor: pointer;
   font: inherit;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -948,6 +950,45 @@ body {
   box-shadow: none;
   animation: entranceFade 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: 0.2s;
+}
+
+/* Inline bedankt na contactformulier (AJAX / FormSubmit) */
+.contact-panel--form {
+  margin-top: 0;
+}
+
+.contact-success {
+  margin-top: 0;
+  animation: entranceFade 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.contact-success__title {
+  margin-bottom: 1rem;
+}
+
+.contact-success__lead {
+  max-width: 32rem;
+  margin-bottom: 1.75rem;
+}
+
+.contact-success__actions {
+  margin: 0;
+}
+
+.contact-form-error {
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 61, 154, 0.45);
+  background: rgba(255, 61, 154, 0.08);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.submit[aria-busy="true"] {
+  opacity: 0.75;
+  cursor: wait;
 }
 
 @keyframes entranceFade {
